@@ -44,4 +44,6 @@ $ rails new sample_app -j esbuild -m template.rb
 
 ### Credits
 
+This adaptation by Greg Van de Mosselaer
+
 Made by @justalever (yours truly). Find me on [Twitter](https://twitter.com/justalever), [web-crunch.com](https://web-crunch.com), [GitHub](https://github.com/justalever).
