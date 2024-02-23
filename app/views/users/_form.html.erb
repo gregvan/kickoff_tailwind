@@ -1,0 +1,38 @@
+<%= form_with(model: user) do |form| %>
+<% if user.errors.any? %>
+<div id="error_explanation" class="bg-red-50 p-6 rounded text-red-800">
+  <h2 class="text-lg font-semibold mb-3"><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+  <ul class="list-disc leading-relaxed">
+    <% user.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+  <div class="mb-6">
+        <%= form.label :first_name, class: label_class %>
+          <%= form.text_field :first_name, class: input_class %>
+      </div>
+  <div class="mb-6">
+        <%= form.label :last_name, class: label_class %>
+          <%= form.text_field :last_name, class: input_class %>
+      </div>
+  <div class="mb-6">
+        <%= form.label :email, class: label_class %>
+          <%= form.text_field :email, class: input_class %>
+      </div>
+  <div class="mb-6">
+        <%= form.label :admin, class: label_class %>
+          <%= form.check_box :admin, class: input_class %>
+      </div>
+
+<%= form.submit class: button_class(theme: 'primary') %>
+
+<% if user.persisted? %>
+<%= link_to "Cancel", user, class: "text-neutral-700 underline inline-block ml-3" %>
+<% else %>
+<%= link_to "Cancel", users_path, class:  "text-neutral-700 underline inline-block ml-3" %>
+<% end %>
+<% end %>
