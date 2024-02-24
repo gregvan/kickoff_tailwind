@@ -56,6 +56,7 @@ end
 def copy_templates
   directory "app", force: true
   directory "lib", force: true
+  route "resources :users"
 end
 
 def add_sidekiq
