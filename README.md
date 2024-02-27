@@ -34,8 +34,8 @@ $ rails new sample_app -j esbuild -m template.rb
 - Custom view helper defaults for basic button and form elements.
 - Scaffolding templates made with Tailwind CSS
 
-### Once installed what do I NOT get?
-- This is not intended for production applications in it's current state. This is entended to save you two days in config work for you dev journey as Devise and Tailwind (or alternative). 
+### What do I not get?
+- This is not intended for production applications in it's current state. (This is entended to save you two days of boilerplate config work if you are already familiar with Devise and Tailwind.) 
 
 ### Changes on this fork
 - [Devise](https://github.com/plataformatec/devise) version bumped to 4.9.8. 
