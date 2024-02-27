@@ -34,14 +34,14 @@ $ rails new sample_app -j esbuild -m template.rb
 - Custom view helper defaults for basic button and form elements.
 - Scaffolding templates made with Tailwind CSS
 
-### What you do not get
-- This is not a Production-Ready app. This is entended for saving you two days in config work for you dev journey as Devise and Tailwind (or alternative) are a must for any sandbox project. This is not intended for production applications. 
+### Once installed what do I NOT get?
+- This is not intended for production applications in it's current state. This is entended to save you two days in config work for you dev journey as Devise and Tailwind (or alternative). 
 
 ### Changes on this fork
 - [Devise](https://github.com/plataformatec/devise) version bumped to 4.9.8. 
-- We have turned on fields in Devise for :confirmable (this required mailcatcher gem - :confirmable-savvy links also appear in you dev server log if you do not want to use the mailcatcher gem)
+- We have turned on fields in Devise for :confirmable (generated confirmation links can be accessed in development with the mailcatcher gem or by looking at the development server log)
 - The navbar has been updated to work with modern rails turbo 
-- The beginnings of a separate user CRUD have been added (would like many other aspects of this module need to be locked down before ever going into production).
+- The beginnings of a separate User CRUD have been added (This would, like many other aspects of this fork, need to be locked down before ever going near a production environment).
 
 ### Possible future extension
 - [Devise-Invitable](https://github.com/plataformatec/devise)
