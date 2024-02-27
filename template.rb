@@ -10,7 +10,8 @@ def source_paths
 end
 
 def add_gems
-  gem 'devise', '~> 4.8', '>= 4.8.1'
+  # gem 'devise', '~> 4.8', '>= 4.8.1'
+  gem 'devise', '~> 4.9', '>= 4.9.3'
   gem 'friendly_id', '~> 5.4', '>= 5.4.2'
   gem 'cssbundling-rails'
   gem 'name_of_person'
@@ -47,16 +48,45 @@ def add_users
   in_root do
     migration = Dir.glob("db/migrate/*").max_by{ |f| File.mtime(f) }
     gsub_file migration, /:admin/, ":admin, default: false"
+
+    #uncomment the optional fields for :confirmable, :lockable, :timeoutable, :trackable 
+    # NOT included (yet) are :omniauthable, :invitable or any 2FA fields
+    gsub_file migration, /# t.integer  :sign_in_count/, "t.integer  :sign_in_count"
+    gsub_file migration, /# t.datetime :current_sign_in_at/, "t.datetime :current_sign_in_at"
+    gsub_file migration, /# t.datetime :last_sign_in_at/, "t.datetime :last_sign_in_at"
+    gsub_file migration, /# t.string   :current_sign_in_ip/, "t.string   :current_sign_in_ip"
+    gsub_file migration, /# t.string   :last_sign_in_ip/, "t.string   :last_sign_in_ip"
+
+    gsub_file migration, /# t.string   :confirmation_token/, "t.string   :confirmation_token"
+    gsub_file migration, /# t.datetime :confirmed_at/, "t.datetime :confirmed_at"
+    gsub_file migration, /# t.datetime :confirmation_sent_at/, "t.datetime :confirmation_sent_at"
+    gsub_file migration, /# t.string   :unconfirmed_email # Only if using reconfirmable/, "t.string   :unconfirmed_email # Only if using reconfirmable"
+
+    gsub_file migration, /# t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts/, "t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts"
+    gsub_file migration, /# t.string   :unlock_token # Only if unlock strategy is :email or :both/, "t.string   :unlock_token # Only if unlock strategy is :email or :both"
+    gsub_file migration, /# t.datetime :locked_at/, "t.datetime :locked_at"
+
+    gsub_file migration, /# add_index :users, :confirmation_token,   unique: true/, "add_index :users, :confirmation_token,   unique: true"
+    gsub_file migration, /# add_index :users, :unlock_token,         unique: true/, "add_index :users, :unlock_token,         unique: true"
+
   end
 
   # name_of_person gem
   append_to_file("app/models/user.rb", "\nhas_person_name\n", after: "class User < ApplicationRecord")
+
+  # add :confirmable from the start 
+  content = ":confirmable"
+  insert_into_file "app/models/user.rb", ",\n\t\t\t\t\t#{content}\n", after: ":validatable"
+
 end
 
 def copy_templates
   directory "app", force: true
   directory "lib", force: true
-  route "resources :users"
+
+  # update the routes file
+  content = "resources :users"
+  insert_into_file "config/routes.rb", "\n\t#{content}\n", after: "devise_for :users"
 end
 
 def add_sidekiq

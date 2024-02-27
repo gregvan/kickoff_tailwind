@@ -17,7 +17,7 @@ This template comes with Tailwind CSS preconfigured for use. To make use of tool
 
 ## How it works
 
-When creating a new rails app simply pass the template filename and ruby extension through. I opt for esbuild instead of the default importmap configuration for JavaScript.
+When creating a new rails app simply pass the template filename and ruby extension through. Andy opted for esbuild instead of the default importmap configuration for JavaScript. 
 
 ```bash
 $ rails new sample_app -j esbuild -m template.rb
@@ -34,13 +34,25 @@ $ rails new sample_app -j esbuild -m template.rb
 - Custom view helper defaults for basic button and form elements.
 - Scaffolding templates made with Tailwind CSS
 
+### What you do not get
+- This is not a Production-Ready app. This is entended for saving you two days in config work for you dev journey as Devise and Tailwind (or alternative) are a must for any sandbox project. This is not intended for production applications. 
+
+### Changes on this fork
+- [Devise](https://github.com/plataformatec/devise) version bumped to 4.9.8. 
+- We have turned on fields in Devise for :confirmable (this required mailcatcher gem - :confirmable-savvy links also appear in you dev server log if you do not want to use the mailcatcher gem)
+- The navbar has been updated to work with modern rails turbo 
+- The beginnings of a separate user CRUD have been added (would like many other aspects of this module need to be locked down before ever going into production).
+
+### Possible future extension
+- [Devise-Invitable](https://github.com/plataformatec/devise)
+- [Devise-Two-Factor](https://github.com/devise-two-factor/devise-two-factor)
+- [omniauth-google-oauth2](https://github.com/zquestz/omniauth-google-oauth2)
+
+
 ### Boot it up
 
 `$ ./bin/dev`
 
-### Watch an overview
-
-📹 Coming soon!
 
 ### Credits
 

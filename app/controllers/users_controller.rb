@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
+  before_action :require_user
+
   # GET /users or /users.json
   def index
     @users = User.all
@@ -67,4 +69,15 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :admin)
     end
+
+    # in a production app this could go in application_controller.rb
+    def require_user
+      authenticate_user!
+      unless current_user
+        flash[:notice] = "You must be logged in to access this page"
+        login_and_return(request.url)
+        #return false
+      end
+    end
+
 end
