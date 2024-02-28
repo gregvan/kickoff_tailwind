@@ -1,0 +1,4 @@
+running $ cat s.txt jogs your memory to use...  
+
+rails new sample_app -j esbuild -m template.rb
+
